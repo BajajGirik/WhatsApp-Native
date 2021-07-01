@@ -34,6 +34,18 @@ const LoginScreen = () => {
                 leftIcon={<Entypo name="lock" size={24} color="white" /> }
                 onChangeText={value => setPass(value)}
             />
+            <Button
+                containerStyle={styles.buttoncontainer}
+                title="Login"
+                raised
+            />
+            <Button
+                type="outlined"
+                containerStyle={styles.buttoncontainer}
+                title="Register"
+                raised
+            />
+
             <View style={{ height: 100 }}></View>
         </KeyboardAvoidingView>
     )
@@ -58,5 +70,10 @@ const styles = StyleSheet.create({
     input: {
         marginLeft: 7,
         color: "white",
-    }
+    },
+
+    buttoncontainer: {
+        width: 250,
+        margin: 5,
+    },
 });
