@@ -3,10 +3,9 @@ import { Input, Image, Button } from 'react-native-elements';
 import Logo from '../assets/Logo.png'
 import { Zocial, Entypo } from '@expo/vector-icons';
 import React, { useState } from 'react';
-import { nodeName } from 'min-document';
 
 
-const LoginScreen = () => {
+const LoginScreen = ({ navigation }) => {
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');
 
@@ -44,6 +43,7 @@ const LoginScreen = () => {
                 containerStyle={styles.buttoncontainer}
                 title="Register"
                 raised
+                onPress={() => navigation.navigate("Register")}
             />
 
             <View style={{ height: 100 }}></View>
