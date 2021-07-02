@@ -1,15 +1,37 @@
 import { Input, Image, Button } from 'react-native-elements';
 import Logo from '../assets/Logo.png'
 import { StyleSheet, KeyboardAvoidingView, View, Platform } from 'react-native'
-import { FontAwesome5 ,Zocial, Entypo } from '@expo/vector-icons';
+import { Ionicons, FontAwesome5 ,Zocial, Entypo } from '@expo/vector-icons';
 import React, { useState } from 'react';
+import { auth } from '../firebase';
 
 const RegisterScreen = ({ navigation }) => {
     const [name, setName] = useState('');
+    const [photo, setPhoto] = useState('');
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');
     const [repass, setRepass] = useState('');
 
+    const register = () => {
+        if (!(name && email && pass && repass)) {
+            alert("Fill all the required fields!");
+            return false;
+        }
+
+        if (pass !== repass) {
+            alert("Passwords do not match!");
+            return false;
+        }
+        auth.createUserWithEmailAndPassword(email, pass)
+        .then(authUser => {
+            authUser.user.updateProfile({
+                displayName: name,
+                photoURL: photo
+            })
+        })
+        .catch (err => alert(err));
+        
+     };
     return (
         <KeyboardAvoidingView
             behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -22,10 +44,18 @@ const RegisterScreen = ({ navigation }) => {
             <Input
                 inputStyle={styles.input}
                 containerStyle={styles.inputcontainer}
-                placeholder="Name"
+                placeholder="Full Name"
                 leftIcon={<FontAwesome5 name="user-tie" size={24} color="white" />}
                 value={name}
                 onChangeText={value => setName(value)}
+            />
+            <Input
+                inputStyle={styles.input}
+                containerStyle={styles.inputcontainer}
+                placeholder="PhotoUrl (Optional)"
+                leftIcon={<Ionicons name="ios-image" size={24} color="white" />}
+                value={photo}
+                onChangeText={value => setPhoto(value)}
             />
             <Input
                 inputStyle={styles.input}
@@ -57,6 +87,7 @@ const RegisterScreen = ({ navigation }) => {
                 containerStyle={styles.buttoncontainer}
                 title="Register"
                 raised
+                onPress={register}
             />
 
             <View style={{ height: 100 }}></View>
