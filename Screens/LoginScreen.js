@@ -22,7 +22,8 @@ const LoginScreen = ({ navigation }) => {
                 inputStyle={styles.input}
                 containerStyle={styles.inputcontainer}
                 placeholder="Email"
-                leftIcon={<Zocial name="email" size={24} color="white" /> }
+                leftIcon={<Zocial name="email" size={24} color="white" />}
+                value={email}
                 onChangeText={value => setEmail(value)}
             />
             <Input
@@ -30,7 +31,8 @@ const LoginScreen = ({ navigation }) => {
                 containerStyle={styles.inputcontainer}
                 placeholder="Password"
                 secureTextEntry
-                leftIcon={<Entypo name="lock" size={24} color="white" /> }
+                leftIcon={<Entypo name="lock" size={24} color="white" />}
+                value={pass}
                 onChangeText={value => setPass(value)}
             />
             <Button

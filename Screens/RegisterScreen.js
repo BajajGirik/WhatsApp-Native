@@ -5,6 +5,11 @@ import { FontAwesome5 ,Zocial, Entypo } from '@expo/vector-icons';
 import React, { useState } from 'react';
 
 const RegisterScreen = ({ navigation }) => {
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [pass, setPass] = useState('');
+    const [repass, setRepass] = useState('');
+
     return (
         <KeyboardAvoidingView
             behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -18,14 +23,16 @@ const RegisterScreen = ({ navigation }) => {
                 inputStyle={styles.input}
                 containerStyle={styles.inputcontainer}
                 placeholder="Name"
-                leftIcon={<FontAwesome5 name="user-tie" size={24} color="white" /> }
-                onChangeText={value => setPass(value)}
+                leftIcon={<FontAwesome5 name="user-tie" size={24} color="white" />}
+                value={name}
+                onChangeText={value => setName(value)}
             />
             <Input
                 inputStyle={styles.input}
                 containerStyle={styles.inputcontainer}
                 placeholder="Email"
-                leftIcon={<Zocial name="email" size={24} color="white" /> }
+                leftIcon={<Zocial name="email" size={24} color="white" />}
+                value={email}
                 onChangeText={value => setEmail(value)}
             />
             <Input
@@ -33,7 +40,8 @@ const RegisterScreen = ({ navigation }) => {
                 containerStyle={styles.inputcontainer}
                 placeholder="Password"
                 secureTextEntry
-                leftIcon={<Entypo name="lock" size={24} color="white" /> }
+                leftIcon={<Entypo name="lock" size={24} color="white" />}
+                value={pass}
                 onChangeText={value => setPass(value)}
             />
             <Input
@@ -41,8 +49,9 @@ const RegisterScreen = ({ navigation }) => {
                 containerStyle={styles.inputcontainer}
                 placeholder="Re-enter Password"
                 secureTextEntry
-                leftIcon={<Entypo name="lock" size={24} color="white" /> }
-                onChangeText={value => setPass(value)}
+                leftIcon={<Entypo name="lock" size={24} color="white" />}
+                value={repass}
+                onChangeText={value => setRepass(value)}
             />
              <Button
                 containerStyle={styles.buttoncontainer}
