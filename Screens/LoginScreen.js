@@ -1,4 +1,4 @@
-import { KeyboardAvoidingView, StyleSheet, Text, View, Platform } from 'react-native'
+import { KeyboardAvoidingView, StyleSheet, View, Platform } from 'react-native'
 import { Input, Image, Button } from 'react-native-elements';
 import Logo from '../assets/Logo.png'
 import { Zocial, Entypo } from '@expo/vector-icons';

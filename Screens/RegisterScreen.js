@@ -1,7 +1,7 @@
 import { Input, Image, Button } from 'react-native-elements';
 import Logo from '../assets/Logo.png'
-import { StyleSheet, Text, KeyboardAvoidingView, View, Platform } from 'react-native'
-import { Zocial, Entypo } from '@expo/vector-icons';
+import { StyleSheet, KeyboardAvoidingView, View, Platform } from 'react-native'
+import { FontAwesome5 ,Zocial, Entypo } from '@expo/vector-icons';
 import React, { useState } from 'react';
 
 const RegisterScreen = ({ navigation }) => {
@@ -18,6 +18,7 @@ const RegisterScreen = ({ navigation }) => {
                 inputStyle={styles.input}
                 containerStyle={styles.inputcontainer}
                 placeholder="Name"
+                leftIcon={<FontAwesome5 name="user-tie" size={24} color="white" /> }
                 onChangeText={value => setPass(value)}
             />
             <Input
