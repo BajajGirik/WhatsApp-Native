@@ -28,6 +28,7 @@ const LoginScreen = ({ navigation }) => {
 
         return unsubscribe;
     }, [])
+    
     return (
         <KeyboardAvoidingView
             behavior={Platform.OS === "ios" ? "padding" : "height"}

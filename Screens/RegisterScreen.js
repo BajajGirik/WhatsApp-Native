@@ -31,6 +31,13 @@ const RegisterScreen = ({ navigation }) => {
         })
         .catch (err => alert(err.message));
         
+        setName('');
+        setPhoto('');
+        setEmail('');
+        setPass('');
+        setRepass('');
+        navigation.goBack();
+        
      };
     return (
         <KeyboardAvoidingView

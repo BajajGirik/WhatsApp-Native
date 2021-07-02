@@ -5,6 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import LoginScreen from './Screens/LoginScreen';
 import RegisterScreen from './Screens/RegisterScreen';
+import HomeScreen from './Screens/HomeScreen';
 
 const Stack = createStackNavigator();
 const globalOp = {
