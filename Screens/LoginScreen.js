@@ -2,13 +2,32 @@ import { KeyboardAvoidingView, StyleSheet, View, Platform } from 'react-native'
 import { Input, Image, Button } from 'react-native-elements';
 import Logo from '../assets/Logo.png'
 import { Zocial, Entypo } from '@expo/vector-icons';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { auth } from '../firebase';
 
 
 const LoginScreen = ({ navigation }) => {
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');
+    const login = () => {
+        if (!(email && pass))
+        {
+            alert("Fields cannot be empty");
+            return false;
+        }
 
+        auth.signInWithEmailAndPassword(email, pass)
+        .catch(err => alert(err.message));
+     };
+
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged(authUser => {
+            if (authUser && authUser.displayName !== null)
+                navigation.replace("Home");
+        });
+
+        return unsubscribe;
+    }, [])
     return (
         <KeyboardAvoidingView
             behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -39,6 +58,7 @@ const LoginScreen = ({ navigation }) => {
                 containerStyle={styles.buttoncontainer}
                 title="Login"
                 raised
+                onPress={login}
             />
             <Button
                 type="outlined"

@@ -29,7 +29,7 @@ const RegisterScreen = ({ navigation }) => {
                 photoURL: photo
             })
         })
-        .catch (err => alert(err));
+        .catch (err => alert(err.message));
         
      };
     return (
