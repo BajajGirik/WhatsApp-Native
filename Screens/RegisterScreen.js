@@ -1,6 +1,6 @@
 import { Input, Image, Button } from 'react-native-elements';
 import Logo from '../assets/Logo.png'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, KeyboardAvoidingView, View, Platform } from 'react-native'
 import { Zocial, Entypo } from '@expo/vector-icons';
 import React, { useState } from 'react';
 
@@ -56,4 +56,27 @@ const RegisterScreen = ({ navigation }) => {
 
 export default RegisterScreen
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center",
+        padding: 10,
+        backgroundColor: "black"
+    },
+
+    inputcontainer: {
+        width: 400,
+        margin: 5,
+    },
+
+    input: {
+        marginLeft: 7,
+        color: "white",
+    },
+
+    buttoncontainer: {
+        width: 250,
+        margin: 5,
+    },
+});
