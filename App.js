@@ -12,7 +12,7 @@ const globalOp = {
   headerStyle: { backgroundColor: "#00bfa5" },
   headerTitleStyle: {
     color: "#fff",
-    fontWeight: "550"
+    fontWeight: "500"
   },
   headerTintColor: "#fff"
 }
@@ -20,7 +20,10 @@ const globalOp = {
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={globalOp}>
+      <Stack.Navigator
+        initialRouteName="Login"
+        screenOptions={globalOp}
+      >
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Register" component={RegisterScreen} />
         <Stack.Screen name="Home" component={HomeScreen} />

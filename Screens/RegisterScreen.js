@@ -1,6 +1,5 @@
 import { Input, Image, Button } from 'react-native-elements';
-import Logo from '../assets/Logo.png'
-import { StyleSheet, KeyboardAvoidingView, View, Platform } from 'react-native'
+import { StyleSheet, KeyboardAvoidingView, ScrollView, View, Platform } from 'react-native'
 import { Ionicons, FontAwesome5 ,Zocial, Entypo } from '@expo/vector-icons';
 import React, { useState } from 'react';
 import { auth } from '../firebase';
@@ -44,60 +43,59 @@ const RegisterScreen = ({ navigation }) => {
             behavior={Platform.OS === "ios" ? "padding" : "height"}
             style={styles.container}
         >
-            <Image
-                source={{ uri: Logo }}
-                style={{ width: 200, height: 200 }}
-            />
-            <Input
-                inputStyle={styles.input}
-                containerStyle={styles.inputcontainer}
-                placeholder="Full Name"
-                leftIcon={<FontAwesome5 name="user-tie" size={24} color="white" />}
-                value={name}
-                onChangeText={value => setName(value)}
-            />
-            <Input
-                inputStyle={styles.input}
-                containerStyle={styles.inputcontainer}
-                placeholder="PhotoUrl (Optional)"
-                leftIcon={<Ionicons name="ios-image" size={24} color="white" />}
-                value={photo}
-                onChangeText={value => setPhoto(value)}
-            />
-            <Input
-                inputStyle={styles.input}
-                containerStyle={styles.inputcontainer}
-                placeholder="Email"
-                leftIcon={<Zocial name="email" size={24} color="white" />}
-                value={email}
-                onChangeText={value => setEmail(value)}
-            />
-            <Input
-                inputStyle={styles.input}
-                containerStyle={styles.inputcontainer}
-                placeholder="Password"
-                secureTextEntry
-                leftIcon={<Entypo name="lock" size={24} color="white" />}
-                value={pass}
-                onChangeText={value => setPass(value)}
-            />
-            <Input
-                inputStyle={styles.input}
-                containerStyle={styles.inputcontainer}
-                placeholder="Re-enter Password"
-                secureTextEntry
-                leftIcon={<Entypo name="lock" size={24} color="white" />}
-                value={repass}
-                onChangeText={value => setRepass(value)}
-            />
-             <Button
-                containerStyle={styles.buttoncontainer}
-                title="Register"
-                raised
-                onPress={register}
-            />
-
-            <View style={{ height: 100 }}></View>
+            <ScrollView contentContainerStyle={{ flexGrow: 1, alignItems: 'center' ,justifyContent: 'center' }}>
+                <Input
+                    inputStyle={styles.input}
+                    containerStyle={styles.inputcontainer}
+                    placeholder="Full Name"
+                    leftIcon={<FontAwesome5 name="user-tie" size={24} color="white" />}
+                    value={name}
+                    onChangeText={value => setName(value)}
+                />
+                <Input
+                    inputStyle={styles.input}
+                    containerStyle={styles.inputcontainer}
+                    placeholder="PhotoUrl (Optional)"
+                    leftIcon={<Ionicons name="ios-image" size={24} color="white" />}
+                    value={photo}
+                    onChangeText={value => setPhoto(value)}
+                />
+                <Input
+                    inputStyle={styles.input}
+                    containerStyle={styles.inputcontainer}
+                    placeholder="Email"
+                    leftIcon={<Zocial name="email" size={24} color="white" />}
+                    value={email}
+                    onChangeText={value => setEmail(value)}
+                />
+                <Input
+                    inputStyle={styles.input}
+                    containerStyle={styles.inputcontainer}
+                    placeholder="Password"
+                    secureTextEntry
+                    leftIcon={<Entypo name="lock" size={24} color="white" />}
+                    value={pass}
+                    onChangeText={value => setPass(value)}
+                />
+                <Input
+                    inputStyle={styles.input}
+                    containerStyle={styles.inputcontainer}
+                    placeholder="Re-enter Password"
+                    secureTextEntry
+                    leftIcon={<Entypo name="lock" size={24} color="white" />}
+                    value={repass}
+                    onChangeText={value => setRepass(value)}
+                />
+                
+                <Button
+                    containerStyle={styles.buttoncontainer}
+                    title="Register"
+                    raised
+                    onPress={register}
+                />
+                </ScrollView>
+                <View style={{ height: 100 }}></View>
+            
         </KeyboardAvoidingView>
     )
 }
@@ -106,16 +104,16 @@ export default RegisterScreen
 
 const styles = StyleSheet.create({
     container: {
+        paddingTop: 10,
+        paddingBottom: 10,
         flex: 1,
         alignItems: "center",
         justifyContent: "center",
-        padding: 10,
         backgroundColor: "black"
     },
 
     inputcontainer: {
-        width: 400,
-        margin: 5,
+        width: 300,
     },
 
     input: {

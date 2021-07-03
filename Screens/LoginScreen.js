@@ -35,8 +35,8 @@ const LoginScreen = ({ navigation }) => {
             style={styles.container}
         >
             <Image
-                source={{ uri: Logo }}
-                style={{ width: 200, height: 200 }}
+                source={Logo}
+                style={{ width: 150, height: 150 }}
             />
             <Input
                 inputStyle={styles.input}
@@ -81,13 +81,11 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: "center",
         justifyContent: "center",
-        padding: 10,
         backgroundColor: "black"
     },
 
     inputcontainer: {
-        width: 400,
-        margin: 5,
+        width: 300,
     },
 
     input: {
