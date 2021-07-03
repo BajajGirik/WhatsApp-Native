@@ -1,6 +1,6 @@
 import React, { useLayoutEffect } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { SearchBar, Avatar } from 'react-native-elements';
+import { SafeAreaView} from 'react-native';
+import { SearchBar, Avatar, ListItem } from 'react-native-elements';
 import { auth } from '../firebase';
 
 const HomeScreen = ({ navigation }) => {
@@ -8,11 +8,8 @@ const HomeScreen = ({ navigation }) => {
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "WhatsappCLone",
+            // headerTitleAlign: "left",
             headerRight: () => (
-                <View style={{ marginRight: 10, flexDirection: "row"}}>
-                    {/* <SearchBar
-                        placeholder="Type Here..."
-                    /> */}
                     <Avatar
                         rounded
                         title="LG"
@@ -20,23 +17,41 @@ const HomeScreen = ({ navigation }) => {
                             auth.signOut();
                             navigation.replace("Login");
                         }}
+                        containerStyle={{marginRight: 10}}
                         overlayContainerStyle={{ backgroundColor: 'gray' }}
                         // source={{
                         //     uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
                         // }}
                     />
-                </View>
             )
         })
     }, [navigation])
 
     return (
-        <View>
-            <Text>Home Screen</Text>
-        </View>
+        <SafeAreaView>
+          
+                 <ListItem bottomDivider>
+                    <Avatar rounded
+                        title="US"
+                        overlayContainerStyle={{ backgroundColor: 'lightgray' }}
+                        // source={{ uri: item.avatar_url }}
+                    />
+                    <ListItem.Content>
+                    <ListItem.Title style={{fontWeight: "700"}}>Group1</ListItem.Title>
+                    <ListItem.Subtitle
+                        numberOfLines={1}
+                        ellipsizeMode="tail"
+                        style={{ color: "#999", fontWeight: "400" }}
+                    >
+                        Last Message Last MessageLast MessageLast Message
+                    </ListItem.Subtitle>
+                    </ListItem.Content>
+                    <ListItem.Chevron />
+                </ListItem>
+           
+        </SafeAreaView>
     )
 }
 
 export default HomeScreen
 
-const styles = StyleSheet.create({})
