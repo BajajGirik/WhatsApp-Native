@@ -12,8 +12,9 @@ const globalOp = {
   headerStyle: { backgroundColor: "#00bfa5" },
   headerTitleStyle: {
     color: "#fff",
-    fontWeight: "500"
+    fontWeight: "600"
   },
+  headerTitleAlign: "center",
   headerTintColor: "#fff"
 }
 
