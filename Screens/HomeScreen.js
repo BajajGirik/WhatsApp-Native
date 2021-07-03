@@ -1,5 +1,5 @@
 import React, { useLayoutEffect } from 'react';
-import { SafeAreaView} from 'react-native';
+import { ScrollView, SafeAreaView} from 'react-native';
 import { SearchBar, Avatar, ListItem } from 'react-native-elements';
 import { auth } from '../firebase';
 
@@ -29,9 +29,11 @@ const HomeScreen = ({ navigation }) => {
 
     return (
         <SafeAreaView>
-          
+            <ScrollView>
                  <ListItem bottomDivider>
-                    <Avatar rounded
+                    <Avatar
+                        size="medium"
+                        rounded
                         title="US"
                         overlayContainerStyle={{ backgroundColor: 'lightgray' }}
                         // source={{ uri: item.avatar_url }}
@@ -48,7 +50,7 @@ const HomeScreen = ({ navigation }) => {
                     </ListItem.Content>
                     <ListItem.Chevron />
                 </ListItem>
-           
+            </ScrollView>
         </SafeAreaView>
     )
 }
