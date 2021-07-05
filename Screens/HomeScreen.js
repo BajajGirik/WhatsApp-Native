@@ -1,6 +1,7 @@
 import React, { useLayoutEffect } from 'react';
-import { ScrollView, SafeAreaView} from 'react-native';
-import { SearchBar, Avatar, ListItem } from 'react-native-elements';
+import { ScrollView, SafeAreaView, View, TouchableOpacity} from 'react-native';
+import { Avatar, ListItem } from 'react-native-elements';
+import { FontAwesome } from '@expo/vector-icons';
 import { auth } from '../firebase';
 
 const HomeScreen = ({ navigation }) => {
@@ -8,21 +9,26 @@ const HomeScreen = ({ navigation }) => {
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "WhatsappCLone",
-            // headerTitleAlign: "left",
+            headerTitleAlign: "left",
             headerRight: () => (
+                <View style={{ flexDirection: "row", alignItems: "center" }}>
+                    <TouchableOpacity onPress={() => navigation.navigate("AddChat") }>
+                        <FontAwesome name="pencil" size={24} color="black" />
+                    </TouchableOpacity>
                     <Avatar
                         rounded
-                        title="LG"
+                        title={auth.currentUser.displayName[0]}
                         onPress={() => {
                             auth.signOut();
                             navigation.replace("Login");
                         }}
-                        containerStyle={{marginRight: 10}}
+                        containerStyle={{marginRight: 15, marginLeft: 15}}
                         overlayContainerStyle={{ backgroundColor: 'gray' }}
-                        // source={{
-                        //     uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
-                        // }}
+                        source={{
+                            uri: auth.currentUser.photoURL
+                        }}
                     />
+                </View>
             )
         })
     }, [navigation])
