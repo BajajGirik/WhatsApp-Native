@@ -48,7 +48,7 @@ const RegisterScreen = ({ navigation }) => {
                     inputStyle={styles.input}
                     containerStyle={styles.inputcontainer}
                     placeholder="Full Name"
-                    leftIcon={<FontAwesome5 name="user-tie" size={24} color="white" />}
+                    leftIcon={<FontAwesome5 name="user-tie" size={24} color="black" />}
                     value={name}
                     onChangeText={value => setName(value)}
                 />
@@ -56,7 +56,7 @@ const RegisterScreen = ({ navigation }) => {
                     inputStyle={styles.input}
                     containerStyle={styles.inputcontainer}
                     placeholder="PhotoUrl (Optional)"
-                    leftIcon={<Ionicons name="ios-image" size={24} color="white" />}
+                    leftIcon={<Ionicons name="ios-image" size={24} color="black" />}
                     value={photo}
                     onChangeText={value => setPhoto(value)}
                 />
@@ -64,7 +64,7 @@ const RegisterScreen = ({ navigation }) => {
                     inputStyle={styles.input}
                     containerStyle={styles.inputcontainer}
                     placeholder="Email"
-                    leftIcon={<Zocial name="email" size={24} color="white" />}
+                    leftIcon={<Zocial name="email" size={24} color="black" />}
                     value={email}
                     onChangeText={value => setEmail(value)}
                 />
@@ -73,7 +73,7 @@ const RegisterScreen = ({ navigation }) => {
                     containerStyle={styles.inputcontainer}
                     placeholder="Password"
                     secureTextEntry
-                    leftIcon={<Entypo name="lock" size={24} color="white" />}
+                    leftIcon={<Entypo name="lock" size={24} color="black" />}
                     value={pass}
                     onChangeText={value => setPass(value)}
                 />
@@ -82,7 +82,7 @@ const RegisterScreen = ({ navigation }) => {
                     containerStyle={styles.inputcontainer}
                     placeholder="Re-enter Password"
                     secureTextEntry
-                    leftIcon={<Entypo name="lock" size={24} color="white" />}
+                    leftIcon={<Entypo name="lock" size={24} color="black" />}
                     value={repass}
                     onChangeText={value => setRepass(value)}
                 />
@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "black"
+        backgroundColor: "white"
     },
 
     inputcontainer: {
@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
 
     input: {
         marginLeft: 7,
-        color: "white",
+        color: "black",
     },
 
     buttoncontainer: {

@@ -40,7 +40,7 @@ const LoginScreen = ({ navigation }) => {
                 inputStyle={styles.input}
                 containerStyle={styles.inputcontainer}
                 placeholder="Email"
-                leftIcon={<Zocial name="email" size={24} color="white" />}
+                leftIcon={<Zocial name="email" size={24} color="black" />}
                 value={email}
                 onChangeText={value => setEmail(value)}
             />
@@ -49,7 +49,7 @@ const LoginScreen = ({ navigation }) => {
                 containerStyle={styles.inputcontainer}
                 placeholder="Password"
                 secureTextEntry
-                leftIcon={<Entypo name="lock" size={24} color="white" />}
+                leftIcon={<Entypo name="lock" size={24} color="black" />}
                 value={pass}
                 onChangeText={value => setPass(value)}
             />
@@ -79,7 +79,6 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "black"
     },
 
     inputcontainer: {
@@ -88,7 +87,7 @@ const styles = StyleSheet.create({
 
     input: {
         marginLeft: 7,
-        color: "white",
+        color: "black",
     },
 
     buttoncontainer: {
