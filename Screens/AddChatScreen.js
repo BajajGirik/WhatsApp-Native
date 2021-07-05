@@ -1,10 +1,14 @@
 import React, { useLayoutEffect, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { Input, Button } from 'react-native-elements';
-import { FontAwesome } from '@expo/vector-icons';
+import { FontAwesome, AntDesign} from '@expo/vector-icons';
+import EmailValidator from 'email-validator';
 
 const AddChatScreen = ({ navigation }) => {
     const [chatName, setChatName] = useState('');
+    const [groupPic, setGroupPic] = useState('');
+    const [newUser, setNewUser] = useState('');
+
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "Add a new chat",
@@ -12,18 +16,61 @@ const AddChatScreen = ({ navigation }) => {
         })
     }, [navigation])
 
+    const addChat = () => {
+        if (!chatName)
+        {
+            alert("Chat name cannot be empty");
+            return false;
+        }
+        
+        // validate email
+        if (!EmailValidator.validate(newUser))
+        {
+            alert("Enter Valid Email Address");
+            return false;
+        }
+
+        // check if chat already exists
+    };
+
     return (
         <View style={styles.container}>
             <Input
                 leftIcon={<FontAwesome name="wechat" size={24} color="black" />}
                 inputStyle={styles.input}
+                containerStyle={{marginTop: 10}}
                 placeholder="New Chat Name"
                 value={chatName}
                 onChangeText={text => setChatName(text)}
             />
+            <Input
+                leftIcon={<FontAwesome name="picture-o" size={24} color="black" />}
+                inputStyle={styles.input}
+                containerStyle={{marginTop: 10}}
+                placeholder="Group PhotoURL (Optional)"
+                value={groupPic}
+                onChangeText={text => setGroupPic(text)}
+            />
+            <Input
+                leftIcon={<AntDesign name="adduser" size={24} color="black" />}
+                inputStyle={styles.input}
+                containerStyle={{marginTop: 10}}
+                placeholder="User email you want to chat with"
+                value={newUser}
+                onChangeText={text => setNewUser(text)}
+            />
             <Button
-                title="ADD CHAT"
+                title="START Personal Chat"
                 containerStyle={styles.button}
+                onPress={addChat}
+                raised
+            />
+            <Button
+                title="ADD User To Group"
+                type="outlined"
+                containerStyle={styles.button}
+                onPress={addChat}
+                raised
             />
         </View>
     )
@@ -44,5 +91,6 @@ const styles = StyleSheet.create({
 
     button: {
         width: 250,
+        marginBottom: 7,
     }
 });

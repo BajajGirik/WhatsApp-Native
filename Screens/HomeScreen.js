@@ -8,7 +8,7 @@ const HomeScreen = ({ navigation }) => {
 
     useLayoutEffect(() => {
         navigation.setOptions({
-            title: "WhatsappCLone",
+            title: "WhatsappClone",
             headerTitleAlign: "left",
             headerRight: () => (
                 <View style={{ flexDirection: "row", alignItems: "center" }}>
