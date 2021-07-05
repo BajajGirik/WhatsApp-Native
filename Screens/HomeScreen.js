@@ -1,10 +1,12 @@
-import React, { useLayoutEffect } from 'react';
+import React, { useLayoutEffect, useEffect, useState } from 'react';
 import { ScrollView, SafeAreaView, View, TouchableOpacity} from 'react-native';
 import { Avatar, ListItem } from 'react-native-elements';
 import { FontAwesome } from '@expo/vector-icons';
-import { auth } from '../firebase';
+import { auth, db } from '../firebase';
+import Chat from '../components/Chat';
 
 const HomeScreen = ({ navigation }) => {
+    const [chats, setChats] = useState([]);
 
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -33,29 +35,22 @@ const HomeScreen = ({ navigation }) => {
         })
     }, [navigation])
 
+    useEffect(() => {
+        db.collection("chats").onSnapshot(snapshot => {
+            setChats(snapshot.docs.map(doc => ({
+                id: doc.id,
+                data: doc.data()
+            })))
+        }) 
+    },[])
+
     return (
         <SafeAreaView>
-            <ScrollView>
-                 <ListItem bottomDivider>
-                    <Avatar
-                        size="medium"
-                        rounded
-                        title="US"
-                        overlayContainerStyle={{ backgroundColor: 'lightgray' }}
-                        // source={{ uri: item.avatar_url }}
-                    />
-                    <ListItem.Content>
-                    <ListItem.Title style={{fontWeight: "700"}}>Group1</ListItem.Title>
-                    <ListItem.Subtitle
-                        numberOfLines={1}
-                        ellipsizeMode="tail"
-                        style={{ color: "#999", fontWeight: "400" }}
-                    >
-                        Last Message Last MessageLast MessageLast Message
-                    </ListItem.Subtitle>
-                    </ListItem.Content>
-                    <ListItem.Chevron />
-                </ListItem>
+            <ScrollView style={{ height: "100%" }}>
+                {chats.map((chat) => (
+                    <Chat key={chat.id} id={chat.id} data={chat.data} />
+                )
+                )}
             </ScrollView>
         </SafeAreaView>
     )

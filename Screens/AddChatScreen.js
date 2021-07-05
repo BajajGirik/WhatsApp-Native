@@ -3,6 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import { Input, Button } from 'react-native-elements';
 import { FontAwesome, AntDesign} from '@expo/vector-icons';
 import EmailValidator from 'email-validator';
+import { auth, db } from '../firebase';
 
 const AddChatScreen = ({ navigation }) => {
     const [chatName, setChatName] = useState('');
@@ -16,21 +17,49 @@ const AddChatScreen = ({ navigation }) => {
         })
     }, [navigation])
 
-    const addChat = () => {
+    const verify = () => {
         if (!chatName)
         {
             alert("Chat name cannot be empty");
             return false;
         }
-        
+
         // validate email
         if (!EmailValidator.validate(newUser))
         {
             alert("Enter Valid Email Address");
             return false;
         }
+    };
 
-        // check if chat already exists
+    const addChat = () => {
+        verify();
+
+        // check whether chat exists or not 
+
+        db.collection("chats").add({
+            chatName: chatName,
+            chatPic: groupPic,
+            chatType: "P",
+            users: [auth.currentUser.email, newUser]
+        })
+        
+        navigation.goBack();
+    };
+
+    const addGroup = () => {
+        verify();
+
+        db.collection("chats").add({
+            chatName: chatName,
+            chatPic: groupPic,
+            chatType: "G",
+            users: [auth.currentUser.email, newUser]
+        }).then(() => 
+            navigation.goBack()
+        ).catch( error => 
+            alert(error.message)
+        )
     };
 
     return (
@@ -69,7 +98,7 @@ const AddChatScreen = ({ navigation }) => {
                 title="ADD User To Group"
                 type="outlined"
                 containerStyle={styles.button}
-                onPress={addChat}
+                onPress={addGroup}
                 raised
             />
         </View>
