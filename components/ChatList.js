@@ -1,9 +1,9 @@
 import React from 'react';
 import { Avatar, ListItem } from 'react-native-elements';
 
-const Chat = ({id, data}) => {
+const ChatList = ({id, data, goToChat}) => {
     return (
-         <ListItem bottomDivider>
+        <ListItem key={id} onPress={() => goToChat(id,data.chatName) } bottomDivider>
             <Avatar
                 size="medium"
                 rounded
@@ -26,4 +26,4 @@ const Chat = ({id, data}) => {
     )
 }
 
-export default Chat
+export default ChatList

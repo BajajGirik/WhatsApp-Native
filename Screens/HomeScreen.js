@@ -1,9 +1,9 @@
 import React, { useLayoutEffect, useEffect, useState } from 'react';
 import { ScrollView, SafeAreaView, View, TouchableOpacity} from 'react-native';
-import { Avatar, ListItem } from 'react-native-elements';
+import { Avatar } from 'react-native-elements';
 import { FontAwesome } from '@expo/vector-icons';
 import { auth, db } from '../firebase';
-import Chat from '../components/Chat';
+import ChatList from '../components/ChatList';
 
 const HomeScreen = ({ navigation }) => {
     const [chats, setChats] = useState([]);
@@ -35,6 +35,13 @@ const HomeScreen = ({ navigation }) => {
         })
     }, [navigation])
 
+    const goToChat = (id, chatName) => {
+        navigation.navigate("Chat", {
+            id: id,
+            chatName: chatName
+        });
+     };
+
     useEffect(() => {
         db.collection("chats").onSnapshot(snapshot => {
             setChats(snapshot.docs.map(doc => ({
@@ -48,7 +55,9 @@ const HomeScreen = ({ navigation }) => {
         <SafeAreaView>
             <ScrollView style={{ height: "100%" }}>
                 {chats.map((chat) => (
-                    <Chat key={chat.id} id={chat.id} data={chat.data} />
+                    <TouchableOpacity activeOpacity={0.8}>
+                        <ChatList key={chat.id} id={chat.id} data={chat.data} goToChat={goToChat}/>
+                    </TouchableOpacity>    
                 )
                 )}
             </ScrollView>
