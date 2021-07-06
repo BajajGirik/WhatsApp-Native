@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from 'react'
+import React, { useLayoutEffect, useState } from 'react'
 import { StyleSheet, View, TouchableOpacity } from 'react-native'
 import { Avatar, Text } from 'react-native-elements';
 import { MaterialIcons, Entypo, Ionicons } from '@expo/vector-icons';
@@ -6,17 +6,22 @@ import anonymous from '../assets/anonymous.png';
 import { db } from '../firebase';
 
 const ChatScreen = ({ navigation, route }) => {
+    const [chatData, setChatData] = useState({});
+
     useLayoutEffect(() => {
+        const unsubscribe = db.collection("chats").doc(route.params.id).onSnapshot(doc =>
+            setChatData(doc.data())
+        );
+
         navigation.setOptions({
-            title: route.params.chatName,
+            title: chatData?.chatName,
             headerTitle: () => (
                 <View style={{flexDirection: "row", alignItems: "center"}}>
                     <Avatar
                         rounded
-                        title={route.params.chatName[0]}
                         containerStyle={{marginRight: 8}}
                         source={{
-                             uri: anonymous
+                             uri: chatData?.chatPic || anonymous
                         }}
                     />
                     <Text
@@ -26,7 +31,7 @@ const ChatScreen = ({ navigation, route }) => {
                             fontSize: 17
                         }}
                     >
-                        {route.params.chatName}
+                        {chatData?.chatName}
                     </Text>
                 </View>    
             ),
@@ -53,7 +58,7 @@ const ChatScreen = ({ navigation, route }) => {
                 </View>
             )
         })
-    }, [navigation])
+    }, [navigation, chatData])
 
     return (
         <View>

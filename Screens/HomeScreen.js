@@ -38,7 +38,6 @@ const HomeScreen = ({ navigation }) => {
     const goToChat = (id, chatName) => {
         navigation.navigate("Chat", {
             id: id,
-            chatName: chatName
         });
      };
 
