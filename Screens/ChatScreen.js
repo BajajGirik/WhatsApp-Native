@@ -20,9 +20,11 @@ const ChatScreen = ({ navigation, route }) => {
                     <Avatar
                         rounded
                         containerStyle={{marginRight: 8}}
-                        source={{
-                             uri: chatData?.chatPic || anonymous
-                        }}
+                        source={chatData?.chatPic ? ({
+                            uri: chatData.chatPic
+                        }) : (
+                            anonymous
+                        )}
                     />
                     <Text
                         style={{
@@ -58,6 +60,8 @@ const ChatScreen = ({ navigation, route }) => {
                 </View>
             )
         })
+        
+        return unsubscribe;
     }, [navigation, chatData])
 
     return (
