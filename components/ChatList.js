@@ -3,7 +3,7 @@ import { Avatar, ListItem } from 'react-native-elements';
 
 const ChatList = ({id, data, goToChat}) => {
     return (
-        <ListItem key={id} onPress={() => goToChat(id,data.chatName) } bottomDivider>
+        <ListItem onPress={() => goToChat(id,data.chatName) } bottomDivider>
             <Avatar
                 size="medium"
                 rounded

@@ -43,20 +43,20 @@ const HomeScreen = ({ navigation }) => {
      };
 
     useEffect(() => {
-        db.collection("chats").onSnapshot(snapshot => {
+        const unsubscribe = db.collection("chats").onSnapshot(snapshot => {
             setChats(snapshot.docs.map(doc => ({
                 id: doc.id,
                 data: doc.data()
-            })))
-        }) 
+            })));
+        });
     },[])
 
     return (
         <SafeAreaView>
             <ScrollView style={{ height: "100%" }}>
                 {chats.map((chat) => (
-                    <TouchableOpacity activeOpacity={0.8}>
-                        <ChatList key={chat.id} id={chat.id} data={chat.data} goToChat={goToChat}/>
+                    <TouchableOpacity key={chat.id} activeOpacity={0.8}>
+                        <ChatList id={chat.id} data={chat.data} goToChat={goToChat}/>
                     </TouchableOpacity>    
                 )
                 )}
