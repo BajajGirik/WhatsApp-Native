@@ -1,7 +1,7 @@
 import React, { useLayoutEffect, useState } from 'react'
-import { StyleSheet, View, TouchableOpacity } from 'react-native'
+import { StyleSheet, View, TouchableOpacity, SafeAreaView, KeyboardAvoidingView, ScrollView } from 'react-native'
 import { Avatar, Text } from 'react-native-elements';
-import { MaterialIcons, Entypo, Ionicons } from '@expo/vector-icons';
+import { Entypo, Ionicons, AntDesign } from '@expo/vector-icons';
 import anonymous from '../assets/anonymous.png';
 import { db } from '../firebase';
 
@@ -48,10 +48,17 @@ const ChatScreen = ({ navigation, route }) => {
             headerRight: () => (
                 <View style={{ flexDirection: "row", alignItems: "center" }}>
                     <TouchableOpacity activeOpacity={0.6}>
-                        <MaterialIcons name="add-ic-call" size={24} color="white"
+                        <Ionicons name="md-call-outline" size={24} color="white"
                             style={{ marginRight: 10 }}
                         />
                     </TouchableOpacity>
+                    {chatData?.chatType === "G" && (
+                        <TouchableOpacity activeOpacity={0.6}>
+                            <AntDesign name="addusergroup" size={24} color="white"
+                                style={{ marginRight: 10 }}            
+                            />
+                        </TouchableOpacity>
+                    )}  
                     <TouchableOpacity activeOpacity={0.6}>
                         <Entypo name="dots-three-vertical" size={24} color="white"
                             style={{ marginRight: 10 }}
@@ -65,9 +72,13 @@ const ChatScreen = ({ navigation, route }) => {
     }, [navigation, chatData])
 
     return (
-        <View>
-            <Text>{route.params.chatName}</Text>
-        </View>
+        <SafeAreaView>
+            <KeyboardAvoidingView>
+                <ScrollView>
+                    {/* messages  */}
+                </ScrollView>
+            </KeyboardAvoidingView>
+        </SafeAreaView>
     )
 }
 
