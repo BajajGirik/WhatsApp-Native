@@ -1,12 +1,25 @@
 import React, { useLayoutEffect, useState } from 'react'
-import { StyleSheet, View, TouchableOpacity, SafeAreaView, KeyboardAvoidingView, ScrollView } from 'react-native'
-import { Avatar, Text } from 'react-native-elements';
+import { View, TouchableOpacity, SafeAreaView, KeyboardAvoidingView, ScrollView } from 'react-native'
+import { Avatar, Text, Input } from 'react-native-elements';
 import { Entypo, Ionicons, AntDesign } from '@expo/vector-icons';
 import anonymous from '../assets/anonymous.png';
-import { db } from '../firebase';
+import { auth, db } from '../firebase';
+import firebase from 'firebase'; 
 
 const ChatScreen = ({ navigation, route }) => {
     const [chatData, setChatData] = useState({});
+    const [msg, setMsg] = useState('');
+
+    const sendMsg = () => {
+        if (!msg)
+            return false;
+        
+        db.collection("chats").doc(route.params.id).collection("messages").add({
+            sentBy: auth.currentUser.email,
+            message: msg,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp()
+        })
+    };
 
     useLayoutEffect(() => {
         const unsubscribe = db.collection("chats").doc(route.params.id).onSnapshot(doc =>
@@ -72,16 +85,27 @@ const ChatScreen = ({ navigation, route }) => {
     }, [navigation, chatData])
 
     return (
-        <SafeAreaView>
-            <KeyboardAvoidingView>
-                <ScrollView>
+        <SafeAreaView style={{flex: 1}}>
+            <KeyboardAvoidingView style={{flex: 1}}>
+                <ScrollView style={{ flexGrow: 1}}>
+                    <Text>Hello</Text>
                     {/* messages  */}
                 </ScrollView>
+                <Input
+                    placeholder="Message"
+                    rightIcon={
+                        <TouchableOpacity activeOpacity={0.6} onPress={sendMsg}>
+                            <Ionicons name="send-sharp" size={24} color="darkgreen"/>
+                        </TouchableOpacity>
+                    }
+                    inputStyle={{ paddingLeft: 5 }}
+                    rightIconContainerStyle={{ marginLeft: 10 }}
+                    value={msg}
+                    onChangeText={value => setMsg(value)}
+                />
             </KeyboardAvoidingView>
         </SafeAreaView>
     )
 }
 
 export default ChatScreen
-
-const styles = StyleSheet.create({});
