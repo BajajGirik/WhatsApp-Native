@@ -5,20 +5,21 @@ import { Entypo, Ionicons, AntDesign } from '@expo/vector-icons';
 import anonymous from '../assets/anonymous.png';
 import { auth, db } from '../firebase';
 import firebase from 'firebase'; 
+import Messages from '../components/Messages';
 
 const ChatScreen = ({ navigation, route }) => {
     const [chatData, setChatData] = useState({});
-    const [msg, setMsg] = useState('');
+    const [inpu, setInpu] = useState('');
 
     const sendMsg = () => {
-        if (!msg)
+        if (!inpu)
             return false;
         
         db.collection("chats").doc(route.params.id).collection("messages").add({
             sentBy: auth.currentUser.email,
-            message: msg,
+            message: inpu,
             timestamp: firebase.firestore.FieldValue.serverTimestamp()
-        })
+        }).catch(err => alert(err.message))
     };
 
     useLayoutEffect(() => {
@@ -82,14 +83,13 @@ const ChatScreen = ({ navigation, route }) => {
         })
         
         return unsubscribe;
-    }, [navigation, chatData])
+    }, [navigation])
 
     return (
         <SafeAreaView style={{flex: 1}}>
             <KeyboardAvoidingView style={{flex: 1}}>
                 <ScrollView style={{ flexGrow: 1}}>
-                    <Text>Hello</Text>
-                    {/* messages  */}
+                    <Messages />
                 </ScrollView>
                 <Input
                     placeholder="Message"
@@ -100,8 +100,8 @@ const ChatScreen = ({ navigation, route }) => {
                     }
                     inputStyle={{ paddingLeft: 5 }}
                     rightIconContainerStyle={{ marginLeft: 10 }}
-                    value={msg}
-                    onChangeText={value => setMsg(value)}
+                    value={inpu}
+                    onChangeText={value => setInpu(value)}
                 />
             </KeyboardAvoidingView>
         </SafeAreaView>
