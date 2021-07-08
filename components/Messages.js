@@ -24,7 +24,6 @@ const Messages = ({ id }) => {
         {messages.map(message => (
             message.data.sentBy === auth.currentUser.email ? (
                 <View key={message.id} style={styles.sent}>
-                    <Text style={styles.sentby}>{message.data.sentBy}</Text>
                     <Text style={styles.sentmes}>{message.data.message}</Text>
                     {/* <Text>{message.data.timestamp}</Text> */}
                 </View>    

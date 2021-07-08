@@ -107,7 +107,13 @@ const ChatScreen = ({ navigation, route }) => {
                                 <Ionicons name="send-sharp" size={24} color="darkgreen"/>
                             </TouchableOpacity>
                         }
-                        inputStyle={{ paddingLeft: 5 }}
+                        inputStyle={{ paddingLeft: 7}}
+                        inputContainerStyle={{
+                            padding: 4,
+                            backgroundColor: "white",
+                            borderRadius: 8,
+                            borderBottomWidth: 0
+                        }}
                         rightIconContainerStyle={{ marginLeft: 10 }}
                         value={inpu}
                         onChangeText={value => setInpu(value)}
