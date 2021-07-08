@@ -1,5 +1,5 @@
 import React, { useLayoutEffect, useState, useEffect } from 'react'
-import { View, TouchableOpacity, SafeAreaView, KeyboardAvoidingView, ScrollView } from 'react-native'
+import { View, TouchableOpacity, SafeAreaView, KeyboardAvoidingView, ImageBackground} from 'react-native'
 import { Avatar, Text, Input } from 'react-native-elements';
 import { Entypo, Ionicons, AntDesign } from '@expo/vector-icons';
 import anonymous from '../assets/anonymous.png';
@@ -92,21 +92,27 @@ const ChatScreen = ({ navigation, route }) => {
 
     return (
         <SafeAreaView style={{flex: 1}}>
-            <KeyboardAvoidingView style={{flex: 1}}>
-                <Messages id={route.params.id} />
-                
-                <Input
-                    placeholder="Message"
-                    rightIcon={
-                        <TouchableOpacity activeOpacity={0.6} onPress={sendMsg}>
-                            <Ionicons name="send-sharp" size={24} color="darkgreen"/>
-                        </TouchableOpacity>
-                    }
-                    inputStyle={{ paddingLeft: 5 }}
-                    rightIconContainerStyle={{ marginLeft: 10 }}
-                    value={inpu}
-                    onChangeText={value => setInpu(value)}
-                />
+            <KeyboardAvoidingView style={{ flex: 1 }}>
+                <ImageBackground source={{uri: "https://cdn.wallpapersafari.com/61/64/3QBHDv.png"}} style={{
+                    flex: 1,
+                    resizeMode: 'cover',
+                    justifyContent: 'center',
+                }}>
+                    <Messages id={route.params.id} />
+                    
+                    <Input
+                        placeholder="Message"
+                        rightIcon={
+                            <TouchableOpacity activeOpacity={0.6} onPress={sendMsg}>
+                                <Ionicons name="send-sharp" size={24} color="darkgreen"/>
+                            </TouchableOpacity>
+                        }
+                        inputStyle={{ paddingLeft: 5 }}
+                        rightIconContainerStyle={{ marginLeft: 10 }}
+                        value={inpu}
+                        onChangeText={value => setInpu(value)}
+                    />
+                </ImageBackground>
             </KeyboardAvoidingView>
         </SafeAreaView>
     )

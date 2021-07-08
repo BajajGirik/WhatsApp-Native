@@ -30,6 +30,7 @@ const Messages = ({ id }) => {
                 </View>    
             ) : (
                 <View key={message.id} style={styles.receive}>
+                    <Text style={styles.sentby}>{message.data.sentBy}</Text>
                     <Text style={styles.receivemes}>{message.data.message}</Text>
                 </View>    
             )
@@ -43,6 +44,7 @@ export default Messages
 const styles = StyleSheet.create({
     sent: {
         marginTop: 30,
+        marginRight: 12,
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "flex-end",
@@ -50,6 +52,7 @@ const styles = StyleSheet.create({
 
     receive: {
         marginTop: 30,
+        marginLeft: 12,
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "flex-start",     
@@ -68,7 +71,7 @@ const styles = StyleSheet.create({
         position: "relative",
         fontSize: 16,
         padding: 12,
-        backgroundColor: "#888",
+        backgroundColor: "#eee",
         color: "black",
         maxWidth: "80%",
     },
