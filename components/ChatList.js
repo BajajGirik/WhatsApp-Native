@@ -1,5 +1,6 @@
 import React from 'react';
 import { Avatar, ListItem } from 'react-native-elements';
+import anonymous from '../assets/anonymous.png';
 
 const ChatList = ({id, data, goToChat}) => {
     return (
@@ -9,7 +10,11 @@ const ChatList = ({id, data, goToChat}) => {
                 rounded
                 title={data.chatName[0]}
                 overlayContainerStyle={{ backgroundColor: 'lightgray' }}
-                source={{ uri: data?.chatPic }}
+                source={data?.chatPic ? ({
+                            uri: data.chatPic
+                        }) : (
+                            anonymous
+                        )}
             />
             <ListItem.Content>
                 <ListItem.Title style={{ fontWeight: "700" }}>{data.chatName}</ListItem.Title>

@@ -8,7 +8,7 @@ const Messages = ({ id }) => {
         
     useEffect(() => {
         const unsubscribe = db.collection("chats").doc(id).collection("messages")
-        .orderBy('timestamp', 'desc').onSnapshot(snapshot => {
+        .orderBy('timestamp', 'asc').onSnapshot(snapshot => {
             setMessages(snapshot.docs.map(doc => ({
                 id: doc.id,
                 data: doc.data()
@@ -24,7 +24,9 @@ const Messages = ({ id }) => {
         {messages.map(message => (
             message.data.sentBy === auth.currentUser.email ? (
                 <View key={message.id} style={styles.sent}>
+                    <Text style={styles.sentby}>{message.data.sentBy}</Text>
                     <Text style={styles.sentmes}>{message.data.message}</Text>
+                    {/* <Text>{message.data.timestamp}</Text> */}
                 </View>    
             ) : (
                 <View key={message.id} style={styles.receive}>
@@ -40,19 +42,40 @@ export default Messages
 
 const styles = StyleSheet.create({
     sent: {
-        padding: 10,
+        marginTop: 30,
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "flex-end",
-        backgroundColor: "lightgreen",
-        color: "black"
     },
+
     receive: {
-        padding: 10,
+        marginTop: 30,
         flexDirection: "row",
         alignItems: "center",
-        justifyContent: "flex-start",
-        backgroundColor: "#888",
-        color: "black"
+        justifyContent: "flex-start",     
     },
+
+    sentmes: {
+        position: "relative",
+        fontSize: 16,
+        padding: 12,
+        backgroundColor: "lightgreen",
+        color: "black",
+        maxWidth: "80%",
+    },
+
+    receivemes: {
+        position: "relative",
+        fontSize: 16,
+        padding: 12,
+        backgroundColor: "#888",
+        color: "black",
+        maxWidth: "80%",
+    },
+
+    sentby: {
+        position: "absolute",
+        fontSize: 12,
+        top: -15,
+    }
 });
