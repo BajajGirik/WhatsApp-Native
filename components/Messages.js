@@ -24,11 +24,11 @@ const Messages = ({ id }) => {
         {messages.map(message => (
             message.data.sentBy === auth.currentUser.email ? (
                 <View key={message.id} style={styles.sent}>
-                    <Text>{message.data.message}</Text>
+                    <Text style={styles.sentmes}>{message.data.message}</Text>
                 </View>    
             ) : (
                 <View key={message.id} style={styles.receive}>
-                    <Text>{message.data.message}</Text>
+                    <Text style={styles.receivemes}>{message.data.message}</Text>
                 </View>    
             )
         ))}
@@ -39,6 +39,20 @@ const Messages = ({ id }) => {
 export default Messages
 
 const styles = StyleSheet.create({
-    sent: {},
-    receive: {}
+    sent: {
+        padding: 10,
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "flex-end",
+        backgroundColor: "lightgreen",
+        color: "black"
+    },
+    receive: {
+        padding: 10,
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "flex-start",
+        backgroundColor: "#888",
+        color: "black"
+    },
 });
