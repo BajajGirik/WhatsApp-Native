@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState } from 'react'
+import React, { useLayoutEffect, useState, useEffect } from 'react'
 import { View, TouchableOpacity, SafeAreaView, KeyboardAvoidingView, ScrollView } from 'react-native'
 import { Avatar, Text, Input } from 'react-native-elements';
 import { Entypo, Ionicons, AntDesign } from '@expo/vector-icons';
@@ -20,13 +20,11 @@ const ChatScreen = ({ navigation, route }) => {
             message: inpu,
             timestamp: firebase.firestore.FieldValue.serverTimestamp()
         }).catch(err => alert(err.message))
+
+        setInpu('');
     };
 
     useLayoutEffect(() => {
-        const unsubscribe = db.collection("chats").doc(route.params.id).onSnapshot(doc =>
-            setChatData(doc.data())
-        );
-
         navigation.setOptions({
             title: chatData?.chatName,
             headerTitle: () => (
@@ -82,15 +80,21 @@ const ChatScreen = ({ navigation, route }) => {
             )
         })
         
+    }, [navigation, chatData])
+
+    useEffect(() => {
+        const unsubscribe = db.collection("chats").doc(route.params.id).onSnapshot(doc =>
+            setChatData(doc.data())
+        );
+
         return unsubscribe;
-    }, [navigation])
+    }, [])
 
     return (
         <SafeAreaView style={{flex: 1}}>
             <KeyboardAvoidingView style={{flex: 1}}>
-                <ScrollView style={{ flexGrow: 1}}>
-                    <Messages />
-                </ScrollView>
+                <Messages id={route.params.id} />
+                
                 <Input
                     placeholder="Message"
                     rightIcon={
