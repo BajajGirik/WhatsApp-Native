@@ -3,6 +3,7 @@ import { View, TouchableOpacity, SafeAreaView, KeyboardAvoidingView, ImageBackgr
 import { Avatar, Text, Input } from 'react-native-elements';
 import { Entypo, Ionicons, AntDesign } from '@expo/vector-icons';
 import anonymous from '../assets/anonymous.png';
+import background from '../assets/background.png';
 import { auth, db } from '../firebase';
 import firebase from 'firebase'; 
 import Messages from '../components/Messages';
@@ -93,7 +94,7 @@ const ChatScreen = ({ navigation, route }) => {
     return (
         <SafeAreaView style={{flex: 1}}>
             <KeyboardAvoidingView style={{ flex: 1 }}>
-                <ImageBackground source={{uri: "https://cdn.wallpapersafari.com/61/64/3QBHDv.png"}} style={{
+                <ImageBackground source={background} style={{
                     flex: 1,
                     resizeMode: 'cover',
                     justifyContent: 'center',

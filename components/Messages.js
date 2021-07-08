@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import { auth, db } from '../firebase';
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
 
 const Messages = ({ id }) => {
     
@@ -24,14 +24,19 @@ const Messages = ({ id }) => {
         {messages.map(message => (
             message.data.sentBy === auth.currentUser.email ? (
                 <View key={message.id} style={styles.sent}>
-                    <Text style={styles.sentmes}>{message.data.message}</Text>
-                    {/* <Text>{message.data.timestamp}</Text> */}
-                </View>    
+                    <View style={styles.sentcontainer}>
+                        <Text style={styles.sentmes}>{message.data.message}</Text>
+                        <Text>{message.data.timestamp?.toDate().toLocaleString()}</Text>
+                    </View>                
+                </View>
             ) : (
                 <View key={message.id} style={styles.receive}>
-                    <Text style={styles.sentby}>{message.data.sentBy}</Text>
-                    <Text style={styles.receivemes}>{message.data.message}</Text>
-                </View>    
+                    <View style={styles.receivecontainer}>        
+                        <Text style={styles.sentby}>{message.data.sentBy}</Text>
+                        <Text style={styles.receivemes}>{message.data.message}</Text>
+                        <Text>{message.data.timestamp?.toDate().toLocaleString()}</Text>
+                    </View>
+                </View>
             )
         ))}
     </ScrollView>
@@ -42,42 +47,45 @@ export default Messages
 
 const styles = StyleSheet.create({
     sent: {
-        marginTop: 30,
+        marginTop: 12,
         marginRight: 12,
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "flex-end",
+        alignItems: "flex-end",
+        justifyContent: "center",
     },
 
     receive: {
-        marginTop: 30,
+        marginTop: 12,
         marginLeft: 12,
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "flex-start",     
+        alignItems: "flex-start",
+        justifyContent: "center",     
     },
 
     sentmes: {
-        position: "relative",
         fontSize: 16,
-        padding: 12,
-        backgroundColor: "lightgreen",
+        padding: 5,
         color: "black",
-        maxWidth: "80%",
+    },
+    
+    receivemes: {
+        fontSize: 16,
+        padding: 5,  
+        color: "black",
     },
 
-    receivemes: {
-        position: "relative",
-        fontSize: 16,
-        padding: 12,
-        backgroundColor: "#eee",
-        color: "black",
+    sentcontainer: {
+        backgroundColor: "lightgreen",
         maxWidth: "80%",
+        padding: 5
+    },
+
+    receivecontainer: {
+        backgroundColor: "white",
+        maxWidth: "80%",
+        padding: 5
     },
 
     sentby: {
-        position: "absolute",
         fontSize: 12,
-        top: -15,
+        color: "tomato"
     }
 });
