@@ -12,12 +12,27 @@ const AddChatScreen = ({ navigation }) => {
 
     useLayoutEffect(() => {
         navigation.setOptions({
-            title: "Add a new chat",
+            title: "Add a new group chat",
             headerTitleAlign: "center",
         })
     }, [navigation])
 
-    const verify = () => {
+    // const addChat = () => {
+    //     verify();
+
+    //     // check whether chat exists or not 
+
+    //     db.collection("chats").add({
+    //         chatName: chatName,
+    //         chatPic: groupPic,
+    //         chatType: "P",
+    //         users: [auth.currentUser.email, newUser]
+    //     })
+        
+    //     navigation.goBack();
+    // };
+
+    const addGroup = () => {
         if (!chatName)
         {
             alert("Chat name cannot be empty");
@@ -29,26 +44,7 @@ const AddChatScreen = ({ navigation }) => {
         {
             alert("Enter Valid Email Address");
             return false;
-        }
-    };
-
-    const addChat = () => {
-        verify();
-
-        // check whether chat exists or not 
-
-        db.collection("chats").add({
-            chatName: chatName,
-            chatPic: groupPic,
-            chatType: "P",
-            users: [auth.currentUser.email, newUser]
-        })
-        
-        navigation.goBack();
-    };
-
-    const addGroup = () => {
-        verify();
+        }  
 
         db.collection("chats").add({
             chatName: chatName,
@@ -68,7 +64,7 @@ const AddChatScreen = ({ navigation }) => {
                 leftIcon={<FontAwesome name="wechat" size={24} color="black" />}
                 inputStyle={styles.input}
                 containerStyle={{marginTop: 10}}
-                placeholder="New Chat Name"
+                placeholder="Group Name"
                 value={chatName}
                 onChangeText={text => setChatName(text)}
             />
@@ -88,15 +84,14 @@ const AddChatScreen = ({ navigation }) => {
                 value={newUser}
                 onChangeText={text => setNewUser(text)}
             />
-            <Button
+            {/* <Button
                 title="START Personal Chat"
                 containerStyle={styles.button}
                 onPress={addChat}
                 raised
-            />
+            /> */}
             <Button
                 title="ADD User To Group"
-                type="outlined"
                 containerStyle={styles.button}
                 onPress={addGroup}
                 raised
