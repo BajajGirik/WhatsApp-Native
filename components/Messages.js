@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { auth, db } from '../firebase';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 
-const Messages = ({ id }) => {
+const Messages = ({ id, chatType }) => {
     
     const [messages, setMessages] = useState([]);
         
@@ -15,7 +15,6 @@ const Messages = ({ id }) => {
             })
             ));
         });
-
         return unsubscribe;
     }, [])
 
@@ -26,15 +25,23 @@ const Messages = ({ id }) => {
                 <View key={message.id} style={styles.sent}>
                     <View style={styles.sentcontainer}>
                         <Text style={styles.sentmes}>{message.data.message}</Text>
-                        <Text>{message.data.timestamp?.toDate().toLocaleString()}</Text>
+                        <Text style={styles.time}>
+                            {message.data.timestamp?.toDate()
+                            .toLocaleString([], { hour: '2-digit', minute:'2-digit', hour12: true })}
+                        </Text>
                     </View>                
                 </View>
             ) : (
                 <View key={message.id} style={styles.receive}>
                     <View style={styles.receivecontainer}>        
-                        <Text style={styles.sentby}>{message.data.sentBy}</Text>
+                        { chatType === "G" &&
+                            <Text style={styles.sentby}>{message.data.sentBy}</Text>}
+                            
                         <Text style={styles.receivemes}>{message.data.message}</Text>
-                        <Text>{message.data.timestamp?.toDate().toLocaleString()}</Text>
+                        <Text style={styles.time}>
+                            {message.data.timestamp?.toDate()
+                            .toLocaleString([], { hour: '2-digit', minute:'2-digit', hour12: true })}
+                        </Text>
                     </View>
                 </View>
             )
@@ -87,5 +94,11 @@ const styles = StyleSheet.create({
     sentby: {
         fontSize: 12,
         color: "tomato"
+    },
+
+    time: {
+        fontSize: 10,
+        color: "#444",
+        marginLeft: "auto"
     }
 });

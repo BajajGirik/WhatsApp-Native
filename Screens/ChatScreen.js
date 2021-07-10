@@ -99,7 +99,7 @@ const ChatScreen = ({ navigation, route }) => {
                     resizeMode: 'cover',
                     justifyContent: 'center',
                 }}>
-                    <Messages id={route.params.id} />
+                    <Messages id={route.params.id} chatType={chatData.chatType} />
                     
                     <Input
                         placeholder="Message"
