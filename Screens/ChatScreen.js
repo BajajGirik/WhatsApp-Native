@@ -22,6 +22,11 @@ const ChatScreen = ({ navigation, route }) => {
             timestamp: firebase.firestore.FieldValue.serverTimestamp()
         }).catch(err => alert(err.message))
 
+        db.collection("chats").doc(route.params.id).set({
+            lastMsg: [auth.currentUser.email, inpu]
+        }, { merge: true })
+        .catch(err => alert(err.message))
+        
         setInpu('');
     };
 

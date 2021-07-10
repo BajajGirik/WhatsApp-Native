@@ -15,7 +15,6 @@ const Messages = ({ id, chatType }) => {
             })
             ));
         });
-        return unsubscribe;
     }, [])
 
     return (
