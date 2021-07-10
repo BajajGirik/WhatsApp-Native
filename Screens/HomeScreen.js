@@ -76,13 +76,13 @@ const HomeScreen = ({ navigation }) => {
                     icon={{ name: 'chat', color: '#fff' }}
                     buttonStyle={{backgroundColor: "#00bfa5"}}
                     title="Start Personal Chat"
-                    onPress={() => console.log('Personal Chat')}
+                    onPress={() => navigation.navigate("AddChat")}
                 />
                 <SpeedDial.Action
                     icon={{ name: 'group', color: '#fff' }}
                     buttonStyle={{backgroundColor: "#00bfa5"}}
                     title="Make A Group"
-                    onPress={() => navigation.navigate("AddChat")}
+                    onPress={() => navigation.navigate("AddGroup")}
                 />
             </SpeedDial>
         </SafeAreaView>

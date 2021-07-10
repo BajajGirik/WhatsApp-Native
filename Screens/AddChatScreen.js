@@ -1,13 +1,11 @@
 import React, { useLayoutEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Input, Button } from 'react-native-elements';
-import { FontAwesome, AntDesign} from '@expo/vector-icons';
+import { AntDesign} from '@expo/vector-icons';
 import EmailValidator from 'email-validator';
 import { auth, db } from '../firebase';
 
 const AddChatScreen = ({ navigation }) => {
-    const [chatName, setChatName] = useState('');
-    const [groupPic, setGroupPic] = useState('');
     const [newUser, setNewUser] = useState('');
 
     useLayoutEffect(() => {
@@ -17,22 +15,7 @@ const AddChatScreen = ({ navigation }) => {
         })
     }, [navigation])
 
-    // const addChat = () => {
-    //     verify();
-
-    //     // check whether chat exists or not 
-
-    //     db.collection("chats").add({
-    //         chatName: chatName,
-    //         chatPic: groupPic,
-    //         chatType: "P",
-    //         users: [auth.currentUser.email, newUser]
-    //     })
-        
-    //     navigation.goBack();
-    // };
-
-    const addGroup = () => {
+    const addChat = () => {
         if (!chatName)
         {
             alert("Chat name cannot be empty");
@@ -44,12 +27,15 @@ const AddChatScreen = ({ navigation }) => {
         {
             alert("Enter Valid Email Address");
             return false;
-        }  
+        } 
 
+        // check whether chat exists or not 
+
+        // add to db
         db.collection("chats").add({
             chatName: chatName,
             chatPic: groupPic,
-            chatType: "G",
+            chatType: "P",
             users: [auth.currentUser.email, newUser]
         }).then(() => 
             navigation.goBack()
@@ -61,22 +47,6 @@ const AddChatScreen = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <Input
-                leftIcon={<FontAwesome name="wechat" size={24} color="black" />}
-                inputStyle={styles.input}
-                containerStyle={{marginTop: 10}}
-                placeholder="Group Name"
-                value={chatName}
-                onChangeText={text => setChatName(text)}
-            />
-            <Input
-                leftIcon={<FontAwesome name="picture-o" size={24} color="black" />}
-                inputStyle={styles.input}
-                containerStyle={{marginTop: 10}}
-                placeholder="Group PhotoURL (Optional)"
-                value={groupPic}
-                onChangeText={text => setGroupPic(text)}
-            />
-            <Input
                 leftIcon={<AntDesign name="adduser" size={24} color="black" />}
                 inputStyle={styles.input}
                 containerStyle={{marginTop: 10}}
@@ -84,16 +54,10 @@ const AddChatScreen = ({ navigation }) => {
                 value={newUser}
                 onChangeText={text => setNewUser(text)}
             />
-            {/* <Button
+            <Button
                 title="START Personal Chat"
                 containerStyle={styles.button}
                 onPress={addChat}
-                raised
-            /> */}
-            <Button
-                title="ADD User To Group"
-                containerStyle={styles.button}
-                onPress={addGroup}
                 raised
             />
         </View>
