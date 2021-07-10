@@ -7,7 +7,7 @@ import ChatList from '../components/ChatList';
 
 const HomeScreen = ({ navigation }) => {
     const [chats, setChats] = useState([]);
-    const [open, setOpen] = useState(true);
+    const [open, setOpen] = useState(false);
 
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -67,19 +67,22 @@ const HomeScreen = ({ navigation }) => {
                 size="large"
                 isOpen={open}
                 icon={{ name: 'add', color: '#fff' }}
+                buttonStyle={{backgroundColor: "#00bfa5"}}
                 openIcon={{ name: 'close', color: '#fff' }}
                 onOpen={() => setOpen(!open)}
                 onClose={() => setOpen(!open)}
             >
                 <SpeedDial.Action
                     icon={{ name: 'chat', color: '#fff' }}
+                    buttonStyle={{backgroundColor: "#00bfa5"}}
                     title="Start Personal Chat"
-                    onPress={() => console.log('Add Something')}
+                    onPress={() => console.log('Personal Chat')}
                 />
                 <SpeedDial.Action
                     icon={{ name: 'group', color: '#fff' }}
+                    buttonStyle={{backgroundColor: "#00bfa5"}}
                     title="Make A Group"
-                    onPress={() => console.log('Delete Something')}
+                    onPress={() => console.log('Group')}
                 />
             </SpeedDial>
         </SafeAreaView>
