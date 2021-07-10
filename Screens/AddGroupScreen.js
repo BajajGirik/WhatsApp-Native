@@ -76,24 +76,6 @@ const AddGroupScreen = ({ navigation }) => {
                 raised
             />
         </View>
-
-        
-        // <View style={styles.container}>
-        //     <Input
-        //         leftIcon={<AntDesign name="adduser" size={24} color="black" />}
-        //         inputStyle={styles.input}
-        //         containerStyle={{marginTop: 10}}
-        //         placeholder="User email you want to chat with"
-        //         value={newUser}
-        //         onChangeText={text => setNewUser(text)}
-        //     />
-        //     <Button
-        //         title="START Personal Chat"
-        //         containerStyle={styles.button}
-        //         onPress={addChat}
-        //         raised
-        //     />    
-        // </View>
     )
 }
 
