@@ -15,10 +15,6 @@ const HomeScreen = ({ navigation }) => {
             headerTitleAlign: "left",
             headerRight: () => (
                 <View style={{ flexDirection: "row", alignItems: "center" }}>
-                    {/* <TouchableOpacity onPress={() => navigation.navigate("AddChat") }>
-                        <FontAwesome name="pencil" size={24} color="black" />
-                    </TouchableOpacity> */}
-
                     <Avatar
                         rounded
                         title={auth.currentUser.displayName[0]}
@@ -37,14 +33,14 @@ const HomeScreen = ({ navigation }) => {
         })
     }, [navigation])
 
-    const goToChat = (id, chatName) => {
+    const goToChat = (id) => {
         navigation.navigate("Chat", {
             id: id,
         });
      };
 
     useEffect(() => {
-        const unsubscribe = db.collection("chats").onSnapshot(snapshot => {
+        const unsubscribe = db.collection("chats").where('users','array-contains', auth.currentUser.email).onSnapshot(snapshot => {
             setChats(snapshot.docs.map(doc => ({
                 id: doc.id,
                 data: doc.data()
