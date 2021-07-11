@@ -1,7 +1,6 @@
 import React, { useLayoutEffect, useEffect, useState } from 'react';
-import { ScrollView, SafeAreaView, View, TouchableOpacity} from 'react-native';
+import { Text, ScrollView, SafeAreaView, View, TouchableOpacity} from 'react-native';
 import { Avatar, SpeedDial } from 'react-native-elements';
-import { FontAwesome } from '@expo/vector-icons';
 import { auth, db } from '../firebase';
 import ChatList from '../components/ChatList';
 
@@ -50,14 +49,21 @@ const HomeScreen = ({ navigation }) => {
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
-            <ScrollView style={{ flexGrow: 1 }}>
-                {chats.map((chat) => (
-                    <TouchableOpacity key={chat.id} activeOpacity={0.8}>
-                        <ChatList id={chat.id} data={chat.data} goToChat={goToChat}/>
-                    </TouchableOpacity>    
-                )
+            {chats.length === 0 ? (
+                    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+                        <Text>No chats available...</Text>
+                </View>
+            ) : (
+                    <ScrollView style={{ flexGrow: 1 }}>
+                    {chats.map((chat) => (
+                        <TouchableOpacity key={chat.id} activeOpacity={0.8}>
+                            <ChatList id={chat.id} data={chat.data} goToChat={goToChat}/>
+                        </TouchableOpacity>    
+                    )
                 )}
             </ScrollView>
+                )
+            }
 
             <SpeedDial
                 size="large"
