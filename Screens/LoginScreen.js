@@ -24,6 +24,8 @@ const LoginScreen = ({ navigation }) => {
         const unsubscribe = auth.onAuthStateChanged(authUser => {
             if (authUser && authUser.displayName !== null)
                 navigation.replace("Home");
+            else
+                auth.signOut();
         });
     }, [])
     

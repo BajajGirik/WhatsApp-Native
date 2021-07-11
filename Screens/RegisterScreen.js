@@ -37,7 +37,8 @@ const RegisterScreen = ({ navigation }) => {
         setRepass('');
         navigation.goBack();
         
-     };
+    };
+    
     return (
         <KeyboardAvoidingView
             behavior={Platform.OS === "ios" ? "padding" : "height"}

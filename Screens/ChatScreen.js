@@ -92,8 +92,6 @@ const ChatScreen = ({ navigation, route }) => {
         const unsubscribe = db.collection("chats").doc(route.params.id).onSnapshot(doc =>
             setChatData(doc.data())
         );
-
-        return unsubscribe;
     }, [])
 
     return (
