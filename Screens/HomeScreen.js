@@ -1,36 +1,12 @@
-import React, { useLayoutEffect, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text, ScrollView, SafeAreaView, View, TouchableOpacity} from 'react-native';
-import { Avatar, SpeedDial } from 'react-native-elements';
+import { SpeedDial } from 'react-native-elements';
 import { auth, db } from '../firebase';
 import ChatList from '../components/ChatList';
 
 const HomeScreen = ({ navigation }) => {
     const [chats, setChats] = useState([]);
     const [open, setOpen] = useState(false);
-
-    useLayoutEffect(() => {
-        navigation.setOptions({
-            title: "WhatsappClone",
-            headerTitleAlign: "left",
-            headerRight: () => (
-                <View style={{ flexDirection: "row", alignItems: "center" }}>
-                    <Avatar
-                        rounded
-                        title={auth.currentUser.displayName[0]}
-                        onPress={() => {
-                            auth.signOut();
-                            navigation.replace("Login");
-                        }}
-                        containerStyle={{marginRight: 15, marginLeft: 15}}
-                        overlayContainerStyle={{ backgroundColor: 'gray' }}
-                        source={{
-                            uri: auth.currentUser.photoURL
-                        }}
-                    />
-                </View>
-            )
-        })
-    }, [navigation])
 
     const goToChat = (id) => {
         navigation.navigate("Chat", {
