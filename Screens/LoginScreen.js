@@ -23,7 +23,7 @@ const LoginScreen = ({ navigation }) => {
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(authUser => {
             if (authUser && authUser.displayName !== null)
-                navigation.replace("Home");
+                navigation.replace("Initial");
             else
                 auth.signOut();
         });

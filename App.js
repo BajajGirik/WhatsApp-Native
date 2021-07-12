@@ -3,6 +3,7 @@ import React from 'react';
 import { StyleSheet} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import LoginScreen from './Screens/LoginScreen';
 import RegisterScreen from './Screens/RegisterScreen';
 import HomeScreen from './Screens/HomeScreen';
@@ -11,6 +12,8 @@ import AddGroupScreen from './Screens/AddGroupScreen';
 import ChatScreen from './Screens/ChatScreen';
 
 const Stack = createStackNavigator();
+const Tab = createMaterialTopTabNavigator();
+
 const globalOp = {
   headerStyle: { backgroundColor: "#00bfa5" },
   headerTitleStyle: {
@@ -21,6 +24,17 @@ const globalOp = {
   headerTintColor: "#fff"
 }
 
+function MyTabs() {
+  return (
+    <Tab.Navigator
+      initialRouteName="Home"
+    >
+      <Tab.Screen name="Home" component={HomeScreen} />
+    </Tab.Navigator>
+  );
+}
+
+
 export default function App() {
   return (
     <NavigationContainer>
@@ -30,9 +44,9 @@ export default function App() {
       >
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Register" component={RegisterScreen} />
-        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Initial" component={MyTabs} />
         <Stack.Screen name="AddChat" component={AddChatScreen} />
-        <Stack.Screen name="AddGroup" component={AddGroupScreen} />
+        <Stack.Screen name="AddGroup" component={AddGroupScreen} /> 
         <Stack.Screen name="Chat" component={ChatScreen} />
       </Stack.Navigator>
     </NavigationContainer>
