@@ -12,6 +12,7 @@ import AddChatScreen from './Screens/AddChatScreen';
 import AddGroupScreen from './Screens/AddGroupScreen';
 import ChatScreen from './Screens/ChatScreen';
 import ContactsScreen from './Screens/ContactsScreen';
+import AddContactScreen from './Screens/AddContactScreen';
 import { auth } from './firebase';
 
 const Stack = createStackNavigator();
@@ -25,7 +26,7 @@ const globalOp = {
   },
   headerTitleAlign: "center",
   headerTintColor: "#fff"
-}
+};
 
 function Initial({ navigation }) {
   
@@ -78,6 +79,7 @@ export default function App() {
         <Stack.Screen name="AddChat" component={AddChatScreen} />
         <Stack.Screen name="AddGroup" component={AddGroupScreen} /> 
         <Stack.Screen name="Chat" component={ChatScreen} />
+        <Stack.Screen name="AddContact" component={AddContactScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
